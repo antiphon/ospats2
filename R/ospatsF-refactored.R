@@ -6,7 +6,8 @@
 #' @param nstrata number of strata
 #' @param covmodel_range Exponential covariance model range parameter
 #' @param niter number of iterations of the allocation shuffle
-#' @param
+#' @param niter_outer number of reruns of the allocation shuffle
+#' @param rsquared adjustment R in the paper
 #'
 #'
 #' @export
@@ -19,7 +20,8 @@ ospatsF_ref <- function(x,
                         verbose = FALSE,
                         # Some parameters for annealing
                         temperature = 1,
-                        coolingrate = .95
+                        coolingrate = .95,
+                        rsquared = 1
 ) {
   cat2 <- if(verbose) message else \(x) NULL
 
@@ -40,7 +42,7 @@ ospatsF_ref <- function(x,
   sv2 <- outer(v, v, "+")
   lag <- dist(xy) |> as.matrix()
   S   <- 0.5 * sv2 * exp(-3*lag/covmodel_range)  ## Check formula?
-  D2  <- z2 + sv2 - 2 * S # dev matrix
+  D2  <- z2/rsquared + sv2 - 2 * S # dev matrix
   #
   # starting cost
   OA2_init <- sapply(split(1:n, strat0), \(i)
@@ -49,6 +51,7 @@ ospatsF_ref <- function(x,
   Obj <- sum(sqrt(OA2_init))
   Obarbest <- Inf
   strat_best <- rep(NA, n)
+  OA2_best <- NULL
   ##### Main looping structure
   #
   # outer loop to rerun many times. From same initials
@@ -97,10 +100,12 @@ ospatsF_ref <- function(x,
     if(Obarfinal < Obarbest) {
       Obarbest   <- Obarfinal
       strat_best <- strat
+      OA2_best    <- OA2
     }
     cat2(sprintf("Run %4i: Objective function [%7.4f]",
                  outer_it, Obarfinal))
   } # outer iterations
   # done
-  data.frame(stratFrame = strat_best)
+  data.frame(stratification = strat_best,
+             Obar = Obarfinal, OA = sqrt(OA2_best))
 }

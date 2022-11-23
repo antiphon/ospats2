@@ -15,9 +15,9 @@ The method described by De Gruijter, Minasny, and Mcbratney has potential uses w
 
 ## Plan
 
--   [ ] The original `Ospats::ospatsF` is refactored and included for comparison purposes
--   [ ] The Julia version is translated to R
--   [ ] New user-facing function is constructed, superseding in input flexibility the original `ospatsF`
+-   [x] The original `Ospats::ospatsF` is refactored and included for comparison purposes (`ospatsF_ref`)
+-   [x] The Julia version is translated to R (`ospatsF_julia`; Just the stratification parts)
+-   [ ] New user-facing function is constructed, superseeding in input flexibility the original `ospatsF`
 -   [ ] Cross-compatibility with other packages, both of inputs and outputs.
 -   [ ] Optimize the code
 
