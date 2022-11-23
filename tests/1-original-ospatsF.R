@@ -15,9 +15,10 @@ s <- ospatsF(data = dat,
              dStart = 0,
              dRSquare = 1,
              dStrata = 3,
-             dMaxrun = 3,
+             dMaxrun = 300,
              coolingRate = 0.9,
              initialTemperature = 1,
+             verbose =FALSE,
              nCycles = 100, # does not seem to do anything
              )
 

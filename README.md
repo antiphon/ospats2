@@ -25,4 +25,4 @@ Design principle is to be close to and/or compatible with the `spsurvey` package
 
 
 
-[^readme-2]: De Gruijter, J. J., B. Minasny, and A. B. Mcbratney. 2015. "Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error." Journal of Survey Statistics and Methodology 3 (1): 19--42. <https://doi.org/10.1093/jssam/smu024.>
+[^readme-2]: De Gruijter, J. J., B. Minasny, and A. B. Mcbratney. 2015. "Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error." Journal of Survey Statistics and Methodology 3 (1): 19--42. <https://doi.org/10.1093/jssam/smu024>.
