@@ -26,7 +26,13 @@ The `ospats2` package includes refactored legacy code from  `Ospats` R-package a
 
 The R-package `Ospats` was found here: https://github.com/brendo1001/ospats/
 
-We include (refactored) `Ospats::ospatsF` with these changes:
+The original `Ospats::ospatsF` is included as `ospats2::ospatsF` with minor differences to reduce the footprint:
+
+1. The call \code{fastPdist2(Ar = as.matrix(z), Br = as.matrix(z)))^2} is now  \code{outer(z, z, "-")^2}
+1. The call \code{fastVsum(Ar = as.matrix(s2))} is now \code{outer(s2, s2, "+")}
+1. The call \code{fastPdist2(Ar = xy, Br = xy)} is now \code{as.matrix(dist(xy)) }
+
+We rewrote (refactored) `Ospats::ospatsF` for development purposes with these changes:
 
 - only the k-means starting partition algorithm is included (equals parameter `dStart=0`)
 - the inputs have been renamed
@@ -122,12 +128,12 @@ dat <- x |> as.matrix()
 
 ```
 
-Then run the algorithm from the original R-package `Ospats`. 
+Then run the algorithm from the original R-package `Ospats`. We have duplicated it, with the modification that the C-code was replaced with native R calls (see help for details).
 
 ```{r}
 ## Original:
 set.seed(1)
-o1 <- Ospats::ospatsF(
+o1 <- ospats2::ospatsF(
   data = dat,
   dRange = 3000,
   dStart = 0,
@@ -172,6 +178,7 @@ Note that since the Julia-based algorithm is different (see above for details), 
 
 ```{r}
 # Simpler julia-code algorithm
+set.seed(1)
 j1 <- ospats2::ospatsF_julia_ref(
   x = x,
   covmodel_range = 3000,

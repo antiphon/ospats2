@@ -18,7 +18,7 @@ ospatsF_ref(
 )
 }
 \arguments{
-\item{x}{data, with variables [x y pred var]}
+\item{x}{data, with variables \link{x y pred var}}
 
 \item{covmodel_range}{Range parameter for assumed exponential correlation model}
 
@@ -42,7 +42,7 @@ ospatsF_ref(
 Refactored Ospats::ospatsF
 }
 \details{
-The algorithm in [Ospats::ospatsF] with new inputs and outputs. Only change is that
+The algorithm in \link{ospatsF} with new inputs and outputs. Only change is that
 the covariance matrix can be given to avoid the exponential covariance assumption and the "mean" covariance formula
 used in the original scripts.
 

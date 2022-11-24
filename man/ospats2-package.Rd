@@ -4,20 +4,20 @@
 \name{ospats2-package}
 \alias{ospats2}
 \alias{ospats2-package}
-\title{ospats2: Startification With 2Correlations}
+\title{ospats2: Optimal Startification With Correlations}
 \description{
 Reboot of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
 }
 \details{
-Reboot of `Ospats`.
+Reboot of \code{Ospats}.
 }
 \section{What}{
 
-The R-package `ospats2` is a reboot of the optimal spatial stratification and sample allocation package `Ospats`, implementing the eponymous algorithm describe by De Gruijter, Minasny, and Mcbratney (2015), and written by Brendan Malone and Nicolas Saby.
+The R-package \code{ospats2} is a reboot of the optimal spatial stratification and sample allocation package \code{Ospats}, implementing the eponymous algorithm describe by De Gruijter, Minasny, and Mcbratney (2015), and written by Brendan Malone and Nicolas Saby.
 
-The original package is not in CRAN (if ever was), and the closest thing to an official R-package as I can tell can be found here <https://github.com/brendo1001/ospats/>. Last relevant update in the repository dates back to 2016, the package date is 2016-07-19.
+The original package is not in CRAN (if ever was), and the closest thing to an official R-package as I can tell can be found here \url{https://github.com/brendo1001/ospats/}. Last relevant update in the repository dates back to 2016, the package date is 2016-07-19.
 
-There is another repository from the authors containing Julia code for a 2017 by De Gruijter and others. Code can be found here <https://github.com/jjdegruijter/ospats>. The code is written for Julia versions before 1.0 so is very much deprecated (Updated code in this repo for comparisons).
+There is another repository from the authors containing Julia code for a 2017 by De Gruijter and others. Code can be found here \url{https://github.com/jjdegruijter/ospats}. The code is written for Julia versions before 1.0 so is very much deprecated (Updated code in this repo for comparisons).
 }
 
 \section{Why}{
@@ -32,6 +32,7 @@ See the vignettes for more details.
 Useful links:
 \itemize{
   \item \url{https://antiphon.github.io/ospats2/}
+  \item \url{https://github.com/antiphon/ospats2/}
 }
 
 }

@@ -13,7 +13,7 @@
 #' @param coolingrate Change temperature each interation by this factor. Should be at most 1.
 #' @param Cov Optional, overrides the covariance matrix calculation using exp-correlation. No checks with data variances.
 #'
-#' @details The algorithm in [Ospats::ospatsF] with new inputs and outputs. Only change is that
+#' @details The algorithm in [ospatsF] with new inputs and outputs. Only change is that
 #' the covariance matrix can be given to avoid the exponential covariance assumption and the "mean" covariance formula
 #' used in the original scripts.
 #'

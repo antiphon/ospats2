@@ -1,6 +1,6 @@
 Package: ospats2
 Type: Package
-Title: Startification With 2Correlations 
+Title: Optimal Startification With Correlations 
 Version: 0.1-0
 Author: Tuomas Rajala
 Maintainer: Tuomas Rajala <tuomas.rajala@iki.fi>
@@ -15,4 +15,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://antiphon.github.io/ospats2/
+URL: https://antiphon.github.io/ospats2/, https://github.com/antiphon/ospats2/
+Roxygen: list(markdown = TRUE)

@@ -15,7 +15,7 @@ ospatsF_julia(
 )
 }
 \arguments{
-\item{data}{data matrix with columns [x y pred var] in that specific order}
+\item{data}{data matrix with columns \link{x y pred var} in that specific order}
 
 \item{dRange}{Range parameter of the exponential correlation model}
 

@@ -16,7 +16,7 @@ ospatsF_julia_ref(
 )
 }
 \arguments{
-\item{x}{data, with variables [x y pred var]}
+\item{x}{data, with variables \link{x y pred var}}
 
 \item{nstrata}{number of starta to consider}
 
@@ -48,5 +48,5 @@ nor does the code include "Section 7." which writes the results into a file.
 This "_ref" is a refactored version, similar to ospatsF_ref, notably the input names change.
 }
 \seealso{
-[ospatsF_julia()] [ospatsF_ref()]
+\code{\link[=ospatsF_julia]{ospatsF_julia()}} \code{\link[=ospatsF_ref]{ospatsF_ref()}}
 }
