@@ -16,3 +16,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://antiphon.github.io/ospats2/
