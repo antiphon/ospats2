@@ -1,6 +1,7 @@
 #' Ospats Julia Version in R
 #'
 #' Refactor the Julia version of Ospats to R
+#'
 #' @param x data, with variables [x y pred var]
 #' @param nstrata number of starta to consider
 #' @param niter_outer Number of independent runs of the optimisation algorithm

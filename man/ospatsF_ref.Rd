@@ -18,20 +18,33 @@ ospatsF_ref(
 )
 }
 \arguments{
-\item{x}{data, with named columns (x, y, pred, var)}
+\item{x}{data, with variables [x y pred var]}
 
-\item{covmodel_range}{Exponential covariance model range parameter}
+\item{covmodel_range}{Range parameter for assumed exponential correlation model}
 
-\item{nstrata}{number of strata}
+\item{nstrata}{number of starta to consider}
 
-\item{niter}{number of iterations of the allocation shuffle}
+\item{niter}{Number of iterations per one run of the optimisation algorithm}
 
-\item{niter_outer}{number of reruns of the allocation shuffle}
+\item{niter_outer}{Number of independent runs of the optimisation algorithm}
 
-\item{rsquared}{adjustment R in the paper}
+\item{verbose}{Print runtime diagnostics?}
 
-\item{Cov}{Optional, overrides the covariance matrix calculation using Exp(covmodel_range)-correlation. No checks with data variances.}
+\item{temperature}{Annealing factor, will accept slightly bad moves with prob ~exp(-abs(delta)/temperature)}
+
+\item{coolingrate}{Change temperature each interation by this factor. Should be at most 1.}
+
+\item{rsquared}{The R^2 in the paper (default: 1)}
+
+\item{Cov}{Optional, overrides the covariance matrix calculation using exp-correlation. No checks with data variances.}
 }
 \description{
 Refactored Ospats::ospatsF
+}
+\details{
+The algorithm in [Ospats::ospatsF] with new inputs and outputs. Only change is that
+the covariance matrix can be given to avoid the exponential covariance assumption and the "mean" covariance formula
+used in the original scripts.
+
+See the vignette \code{vignette("legacy",)}
 }

@@ -2,13 +2,23 @@
 #'
 #' Refactored Ospats::ospatsF
 #'
-#' @param x data, with named columns (x, y, pred, var)
-#' @param nstrata number of strata
-#' @param covmodel_range Exponential covariance model range parameter
-#' @param niter number of iterations of the allocation shuffle
-#' @param niter_outer number of reruns of the allocation shuffle
-#' @param rsquared adjustment R in the paper
-#' @param Cov Optional, overrides the covariance matrix calculation using Exp(covmodel_range)-correlation. No checks with data variances.
+#' @param x data, with variables [x y pred var]
+#' @param covmodel_range Range parameter for assumed exponential correlation model
+#' @param nstrata number of starta to consider
+#' @param niter_outer Number of independent runs of the optimisation algorithm
+#' @param niter Number of iterations per one run of the optimisation algorithm
+#' @param verbose Print runtime diagnostics?
+#' @param rsquared The R^2 in the paper (default: 1)
+#' @param temperature Annealing factor, will accept slightly bad moves with prob ~exp(-abs(delta)/temperature)
+#' @param coolingrate Change temperature each interation by this factor. Should be at most 1.
+#' @param Cov Optional, overrides the covariance matrix calculation using exp-correlation. No checks with data variances.
+#'
+#' @details The algorithm in [Ospats::ospatsF] with new inputs and outputs. Only change is that
+#' the covariance matrix can be given to avoid the exponential covariance assumption and the "mean" covariance formula
+#' used in the original scripts.
+#'
+#' See the vignette \code{vignette("legacy",)}
+#'
 #'
 #'
 #' @export

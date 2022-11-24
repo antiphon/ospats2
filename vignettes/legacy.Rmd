@@ -24,7 +24,8 @@ The `ospats2` package includes refactored legacy code from  `Ospats` R-package a
 
 ## `Ospats` R-library
 
-The R-package `Ospats` was found here:  
+The R-package `Ospats` was found here: https://github.com/brendo1001/ospats/
+
 We include (refactored) `Ospats::ospatsF` with these changes:
 
 - only the k-means starting partition algorithm is included (equals parameter `dStart=0`)

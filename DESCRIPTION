@@ -1,12 +1,11 @@
 Package: ospats2
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Startification With 2Correlations 
+Version: 0.1-0
+Author: Tuomas Rajala
+Maintainer: Tuomas Rajala <tuomas.rajala@iki.fi>
+Description: Reboot of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports: Rcpp (>= 1.0.9)

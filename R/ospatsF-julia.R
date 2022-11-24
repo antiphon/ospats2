@@ -1,7 +1,13 @@
 #' Ospats Julia Version in R
 #'
 #' Translate the Julia version of Ospats to R
-#' @param dat data, [x y pred var]
+#' @param data data matrix with columns [x y pred var] in that specific order
+#' @param dRange Range parameter of the exponential correlation model
+#' @param dRSquare R^2 parameter for adjusting for "regression-to-the-mean" (see the paper)
+#' @param dMaxrun Number of independent (apart from same initial states) repeated optimisation runs
+#' @param nCycles Number of iterations per one run of the optimisation algorithm
+#' @param dStrata Number of strata to have
+#' @param verbose Print runtime diagnostics
 #'
 #' @details The original Julia code:
 #'

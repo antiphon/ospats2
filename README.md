@@ -1,8 +1,8 @@
-# Optimal spatio-temporal stratification
+# Optimal stratification under correlations
 
 ## What
 
-This package is a reboot of the optimal spatial stratification and sample allocation package `Ospats`, implementing the eponymous algorithm describe by De Gruijter, Minasny, and Mcbratney (2015)[^readme-2].
+The R-package `ospats2` is a reboot of the optimal spatial stratification and sample allocation package `Ospats`, implementing the eponymous algorithm describe by De Gruijter, Minasny, and Mcbratney (2015)[^readme-2], and written by Brendan Malone and Nicolas Saby.
 
 The original package is not in CRAN (if ever was), and the closest thing to an official R-package as I can tell can be found here <https://github.com/brendo1001/ospats/>. Last relevant update in the repository dates back to 2016, the package date is 2016-07-19.
 
@@ -22,7 +22,6 @@ The method described by De Gruijter, Minasny, and Mcbratney has potential uses w
 -   [ ] Optimize the code
 
 Design principle is to be close to and/or compatible with the `spsurvey` package (which seems to be alive as of 2022-10-05). It implements the Generalized Random Tesselation Stratification (GRTS) algorithm which does a similar job to `Ospats`, but has also loads of functions for post-stratification tasks such as sampling and estimation.
-
 
 
 [^readme-2]: De Gruijter, J. J., B. Minasny, and A. B. Mcbratney. 2015. "Optimizing Stratification and Allocation for Design-Based Estimation of Spatial Means Using Predictions with Error." Journal of Survey Statistics and Methodology 3 (1): 19--42. <https://doi.org/10.1093/jssam/smu024>.

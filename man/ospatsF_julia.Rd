@@ -15,7 +15,19 @@ ospatsF_julia(
 )
 }
 \arguments{
-\item{dat}{data, [x y pred var]}
+\item{data}{data matrix with columns [x y pred var] in that specific order}
+
+\item{dRange}{Range parameter of the exponential correlation model}
+
+\item{dRSquare}{R^2 parameter for adjusting for "regression-to-the-mean" (see the paper)}
+
+\item{dMaxrun}{Number of independent (apart from same initial states) repeated optimisation runs}
+
+\item{nCycles}{Number of iterations per one run of the optimisation algorithm}
+
+\item{dStrata}{Number of strata to have}
+
+\item{verbose}{Print runtime diagnostics}
 }
 \description{
 Translate the Julia version of Ospats to R
