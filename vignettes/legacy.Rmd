@@ -28,9 +28,9 @@ The R-package `Ospats` was found here: https://github.com/brendo1001/ospats/
 
 The original `Ospats::ospatsF` is included as `ospats2::ospatsF` with minor differences to reduce the footprint:
 
-1. The call \code{fastPdist2(Ar = as.matrix(z), Br = as.matrix(z)))^2} is now  \code{outer(z, z, "-")^2}
-1. The call \code{fastVsum(Ar = as.matrix(s2))} is now \code{outer(s2, s2, "+")}
-1. The call \code{fastPdist2(Ar = xy, Br = xy)} is now \code{as.matrix(dist(xy)) }
+1. The call `fastPdist2(Ar = as.matrix(z), Br = as.matrix(z)))^2` is now  `outer(z, z, "-")^2`
+1. The call `fastVsum(Ar = as.matrix(s2))` is now `outer(s2, s2, "+")`
+1. The call `fastPdist2(Ar = xy, Br = xy)` is now `as.matrix(dist(xy))`
 
 We rewrote (refactored) `Ospats::ospatsF` for development purposes with these changes:
 
