@@ -1,7 +1,14 @@
 #' Ospats Julia Version in R
 #'
-#' Translate the Julia version of Ospats to R
-#' @param dat data, [x y pred var]
+#' Refactor the Julia version of Ospats to R
+#' @param x data, with variables [x y pred var]
+#' @param nstrata number of starta to consider
+#' @param niter_outer Number of independent runs of the optimisation algorithm
+#' @param niter Number of iterations per one run of the optimisation algorithm
+#' @param verbose Print runtime diagnostics?
+#' @param rsquared The R^2 in the paper (default: 1)
+#' @param covmodel_range Range parameter for assumed exponential correlation model
+#' @param Cov Optional, overrides the covariance matrix calculation using exp-correlation. No checks with data variances.
 #'
 #' @details The original Julia code:
 #'
@@ -14,16 +21,19 @@
 #'
 #' This "_ref" is a refactored version, similar to ospatsF_ref, notably the input names change.
 #'
+#' @seealso [ospatsF_julia()] [ospatsF_ref()]
+#'
 #' @export
 
 ospatsF_julia_ref <- function(
                           x,
+                          nstrata = 3,
+                          niter_outer = 3,
+                          niter = 100,
+                          verbose = FALSE,
+                          rsquared = 1,
                           covmodel_range,
-                          nstrata,
-                          rsquared,
-                          niter,
-                          niter_outer,
-                          verbose = FALSE
+                          Cov # optional
                         )
 {
   cat2 <- if(verbose) message else \(x) NULL
@@ -37,8 +47,9 @@ ospatsF_julia_ref <- function(
   z2  <- outer(z, z, "-")^2
   sv2 <- outer(v, v, "+")
   lag <- dist(xy) |> as.matrix()
-  Q   <- exp(-3*lag/covmodel_range)  ## Check formula? This does not make sense.
-  D2  <- z2/rsquared + sv2 * (1 - Q) # dev matrix
+  if(missing(Cov))
+    Cov <- 0.5 * sv2 * exp(-3*lag/covmodel_range) ## Check formula? This does not make sense.
+  D2  <- z2/rsquared + sv2 - 2 * Cov
 
   TOTd2  <- sum(D2) / 2
   ObarH1 <- sqrt(TOTd2) / n
@@ -81,14 +92,14 @@ ospatsF_julia_ref <- function(
       if(transfers == 0) break # Why?
     }  # cycle
     O <- sum(sqrt(OA2))
-    ObarFinal <- O / n
+    Obar_final <- O / n
     ##      save results from run
-    ObarS <- c(ObarS, ObarFinal)
+    ObarS <- c(ObarS, Obar_final)
     StratS <- cbind(StratS, strat)
     cbObj <- sqrt(OA2)
     cbObjS <- cbind(cbObjS, cbObj)
     cat2(sprintf("Run %4i: Objective function [%7.4f]",
-                 run, Obarfinal))
+                 run, Obar_final))
   }
   # End of runs. What follows is summary.
   #  browser()

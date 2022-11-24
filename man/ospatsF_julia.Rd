@@ -11,9 +11,7 @@ ospatsF_julia(
   dMaxrun,
   nCycles,
   dStrata,
-  interv,
-  nmax,
-  RSEmax = 1.5
+  verbose = FALSE
 )
 }
 \arguments{
@@ -28,4 +26,7 @@ The original Julia code:
 https://github.com/jjdegruijter/ospats/ , file "ospatsmr"
 
 The original code uses global variables; This version mimics the input naming of the original ospatsF.
+
+This code only computes the stratification, and not the Neyman allocation and sampling in "Section 6" of the Julia code,
+nor does the code include "Section 7." which writes the results into a file.
 }

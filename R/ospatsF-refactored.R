@@ -8,6 +8,7 @@
 #' @param niter number of iterations of the allocation shuffle
 #' @param niter_outer number of reruns of the allocation shuffle
 #' @param rsquared adjustment R in the paper
+#' @param Cov Optional, overrides the covariance matrix calculation using Exp(covmodel_range)-correlation. No checks with data variances.
 #'
 #'
 #' @export
@@ -21,7 +22,8 @@ ospatsF_ref <- function(x,
                         # Some parameters for annealing
                         temperature = 1,
                         coolingrate = .95,
-                        rsquared = 1
+                        rsquared = 1,
+                        Cov
 ) {
   cat2 <- if(verbose) message else \(x) NULL
 
@@ -41,8 +43,9 @@ ospatsF_ref <- function(x,
   v   <- x[,"var", drop = TRUE]
   sv2 <- outer(v, v, "+")
   lag <- dist(xy) |> as.matrix()
-  S   <- 0.5 * sv2 * exp(-3*lag/covmodel_range)  ## Check formula?
-  D2  <- z2/rsquared + sv2 - 2 * S # dev matrix
+  if(missing(Cov))
+    Cov <- 0.5 * sv2 * exp(-3*lag/covmodel_range) ## Check formula? This does not make sense.
+  D2  <- z2/rsquared + sv2 - 2 * Cov # dev matrix
   #
   # starting cost
   OA2_init <- sapply(split(1:n, strat0), \(i)
@@ -106,6 +109,6 @@ ospatsF_ref <- function(x,
                  outer_it, Obarfinal))
   } # outer iterations
   # done
-  data.frame(stratification = strat_best,
+  list(stratification = strat_best,
              Obar = Obarfinal, OA = sqrt(OA2_best))
 }

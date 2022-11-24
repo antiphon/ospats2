@@ -13,7 +13,8 @@ ospatsF_ref(
   verbose = FALSE,
   temperature = 1,
   coolingrate = 0.95,
-  rsquared = 1
+  rsquared = 1,
+  Cov
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ ospatsF_ref(
 \item{niter_outer}{number of reruns of the allocation shuffle}
 
 \item{rsquared}{adjustment R in the paper}
+
+\item{Cov}{Optional, overrides the covariance matrix calculation using Exp(covmodel_range)-correlation. No checks with data variances.}
 }
 \description{
 Refactored Ospats::ospatsF

@@ -32,7 +32,7 @@ to <- system.time( so <- ospatsF(dat |> as.data.frame(),
 
 # Compare
 
-a <- s$stratFrame
+a <- s$stratification
 b <- so$stratFrame$ospats_strata
 print(table(a,b) )
 

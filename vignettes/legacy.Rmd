@@ -1,0 +1,191 @@
+---
+title: "Ospats legacy code"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Ospats legacy code}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ospats2)
+```
+
+# Legacy code, summary
+
+The `ospats2` package includes refactored legacy code from  `Ospats` R-package and the (now deprecated) Julia code.
+
+## `Ospats` R-library
+
+The R-package `Ospats` was found here:  
+We include (refactored) `Ospats::ospatsF` with these changes:
+
+- only the k-means starting partition algorithm is included (equals parameter `dStart=0`)
+- the inputs have been renamed
+- the ouputs are simplified
+- New option: the covariance matrix can be inputted as-is
+
+The new function is called `ospatsF_ref`, and the renamed parameters are described here:
+
+```{r, eval=FALSE}
+                                 # in ospatsF:
+ospatsF_ref (x,                  # dat
+             covmodel_range,     # dRange
+             nstrata,            # dStrata
+             niter = 100,        # nCycles
+             niter_outer = 100,  # nMaxrun
+             verbose = FALSE,    # =
+             temperature = 1,    # initialTemperature
+             coolingrate = .95,  # coolingRate
+             rsquared = 1,       # dRSquare
+             Cov                 # not in ospatsF
+                                 # Omitted:
+                                 # debug, dStart, ClusterStart
+)
+```
+
+Note that the input for the refactored function should be a tibble, data.frame or similar with named vectors `x,y` for coordinates and `pred,var` for target variable predictions and their variances. For the legacy function `data` should be a matrix with these variables in order `x,y,pred,var`.
+
+
+Note that the covariance in `ospatsF` is computed as $\sigma_{ij}^2:=0.5(\sigma_i^2+\sigma_j^2)\rho_{ij}$, even though the correct form is $\sigma_{ij}^2=\sigma_i\sigma_j\rho_{ij}$. This can be provided using the `Cov` parameter.
+
+
+## Julia implementation
+
+The Julia code was found here: https://github.com/jjdegruijter/ospats/
+
+We rewrite the Julia code in the file `ospatsmr`. The functionality is wrapped in a user-facing function, the original code used global variables, see the `main` julia file in the original repository. Note:
+
+- we only implement the partitioning sections of the code, not the sample allocation or sampling sections
+- the output is not written into files
+
+The interface aligned with the original R-function:
+
+```{r, eval = FALSE}
+ospatsF_julia <- (
+                          data,
+                          dRange,
+                          dRSquare,
+                          dMaxrun,
+                          nCycles,
+                          dStrata,
+                          verbose 
+                        )
+```
+
+And the refactored code with the new inputs:
+
+```{r, eval=FALSE}
+ospatsF_julia_ref (
+                          x,
+                          covmodel_range,
+                          rsquared,
+                          niter_outer,
+                          niter,
+                          nstrata,
+                          verbose,
+                          Cov # optional, new
+                        )
+```
+
+The Julia implementation differs from the R-implementation in key parts:
+
+- Starting partition: 
+  - `ospatsF`: each run starts with the same k-means partition
+  - `ospatsF_julia`: each run starts with a completely random allocation
+- Realloaction of a unit: The probability of moving a unit from strata to other equals 1 if the objective functions improves
+  - `ospatsF`: but slightly worsening move has a small probability too. These probabilities go to zero each iteration (tempering, factor `coolingrate`)
+  - `ospatsF_julia`: no tempering, so just consider improvements
+  
+
+
+## An example
+
+We here illustrate how the refactoring does not change the results. Load example data:
+
+```{r}
+data("ospats_test_data1", package = "ospats2")
+dat1 <- subset(ospats_test_data1, obs)
+x <- with(
+  dat1,
+  data.frame(x = x, y = y, pred = z.pred.mean, var = z.pred.var)
+          ) 
+dat <- x |> as.matrix()
+
+```
+
+Then run the algorithm from the original R-package `Ospats`. 
+
+```{r}
+## Original:
+set.seed(1)
+o1 <- Ospats::ospatsF(
+  data = dat,
+  dRange = 3000,
+  dStart = 0,
+  dStrata = 3,
+  dRSquare = 1,
+  dMaxrun = 5,
+  nCycles = 100,
+  initialTemperature = 1,
+  coolingRate = 0.95,
+  verbose = FALSE 
+)
+```
+
+```{r}
+# Refactored:
+set.seed(1)
+o2 <- ospats2::ospatsF_ref(
+  x  = x,
+  covmodel_range = 3000,
+  nstrata = 3,
+  rsquared = 1,
+  niter_outer = 5,
+  niter = 100,
+  temperature = 1,
+  coolingrate = 0.95,
+  verbose = FALSE 
+)
+```
+
+Check equality.
+
+```{r}
+table(old = o1$stratFrame[,5], new= o2$stratification  ) 
+# Should be reorder-diagonal
+
+print( c(obj_old = o1$objective, obj_new = o2$Obar ))
+
+```
+Pretty much the same. 
+
+Note that since the Julia-based algorithm is different (see above for details), the results might differ. Here they align.
+
+```{r}
+# Simpler julia-code algorithm
+j1 <- ospats2::ospatsF_julia_ref(
+  x = x,
+  covmodel_range = 3000,
+  nstrata = 3,
+  niter_outer = 5,
+  niter = 100
+)
+
+print(table(R=o2$stratification, J=j1$stratification))
+
+print(c(obj_julia=j1$Obar))
+```
+
+
+
+
+
+
