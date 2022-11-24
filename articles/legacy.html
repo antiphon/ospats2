@@ -93,9 +93,16 @@
 <code><a href="../reference/ospatsF.html">ospats2::ospatsF</a></code> with minor differences to reduce the
 footprint:</p>
 <ol style="list-style-type: decimal">
-<li>The call is now </li>
-<li>The call is now </li>
-<li>The call is now </li>
+<li>The call
+<code>fastPdist2(Ar = as.matrix(z), Br = as.matrix(z)))^2</code> is now
+<code>outer(z, z, "-")^2</code>
+</li>
+<li>The call <code>fastVsum(Ar = as.matrix(s2))</code> is now
+<code>outer(s2, s2, "+")</code>
+</li>
+<li>The call <code>fastPdist2(Ar = xy, Br = xy)</code> is now
+<code>as.matrix(dist(xy))</code>
+</li>
 </ol>
 <p>We rewrote (refactored) <code>Ospats::ospatsF</code> for development
 purposes with these changes:</p>
