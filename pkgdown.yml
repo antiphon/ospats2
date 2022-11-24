@@ -1,0 +1,10 @@
+pandoc: 2.19.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  legacy: legacy.html
+last_built: 2022-11-24T12:12Z
+urls:
+  reference: https://antiphon.github.io/ospats2/reference
+  article: https://antiphon.github.io/ospats2/articles
+
