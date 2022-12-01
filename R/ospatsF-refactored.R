@@ -120,5 +120,5 @@ ospatsF_ref <- function(x,
   } # outer iterations
   # done
   list(stratification = strat_best,
-             Obar = Obarfinal, OA = sqrt(OA2_best))
+             Obar = Obarbest, OA = sqrt(OA2_best))
 }
