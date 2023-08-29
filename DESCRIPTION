@@ -1,7 +1,7 @@
 Package: ospats2
 Type: Package
 Title: Optimal Startification With Correlations 
-Version: 0.1-1
+Version: 0.1-2
 Author: Tuomas Rajala
 Maintainer: Tuomas Rajala <tuomas.rajala@iki.fi>
 Description: Reboot of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
@@ -10,7 +10,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: Rcpp (>= 1.0.9)
 LinkingTo: Rcpp
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Suggests: 
     knitr,
     rmarkdown

@@ -82,13 +82,14 @@ ospatsF_ref <- function(x,
         # would unit i be better in some other strata?
         si        <- strat[i]
         s_not_i   <- (1:nstrata)[-si]
-        OA2_no_i  <- OA2[si] - sum( D2[i, strat == si] )
+        OA2_no_i  <- max(0, OA2[si] - sum( D2[i, strat == si] )) # numerical precision might throw negative
         OA2_add_i <- sapply(s_not_i, \(sj) OA2[sj] + sum(D2[i, strat == sj]))
         Odelta    <- sqrt(OA2_no_i) - sqrt(OA2[si]) + sqrt(OA2_add_i) - sqrt(OA2[-si])
         # Come up with change probabilities
         Odelta[Odelta < (-Obj * 1e-10)] <- 0 # TR: greedy
         pr <- exp(-abs(Odelta) / temperature) # annealing-type
         # TR: The original alg flips the coin in order over strata, so smaller preferred.
+        if(any(is.na(pr))) browser()
         for(j in seq_along(pr)) {
           if( runif(1) < pr[j]  ) {  # accept change
             transfers <- transfers + 1
