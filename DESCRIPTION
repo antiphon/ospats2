@@ -4,7 +4,7 @@ Title: Optimal Startification With Correlations
 Version: 0.1-2
 Author: Tuomas Rajala
 Maintainer: Tuomas Rajala <tuomas.rajala@iki.fi>
-Description: Reboot of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
+Description: Re-imagining of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
 License: MIT
 Encoding: UTF-8
 LazyData: true

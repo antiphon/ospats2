@@ -2,7 +2,7 @@
 
 ## What
 
-The R-package `ospats2` is a reboot of the optimal spatial stratification and sample allocation package `Ospats`, implementing the eponymous algorithm describe by De Gruijter, Minasny, and Mcbratney (2015)[^readme-2], and written by Brendan Malone and Nicolas Saby.
+The R-package `ospats2` is an (unofficial) re-boot/re-imagining of the optimal spatial stratification and sample allocation package `Ospats`, implementing the eponymous algorithm describe by De Gruijter, Minasny, and Mcbratney (2015)[^readme-2], and written by Brendan Malone and Nicolas Saby.
 
 The original package is not in CRAN (if ever was), and the closest thing to an official R-package as I can tell can be found here <https://github.com/brendo1001/ospats/>. Last relevant update in the repository dates back to 2016, the package date is 2016-07-19.
 
