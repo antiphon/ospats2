@@ -9,6 +9,10 @@ d0 <- readRDS("test-case-1.rds")
 dat <- d0 |>
   filter(obs) |>
   select(x, y, pred = var1.pred, var = var1.var)
+# increase data
+dat <- dat |>
+  bind_rows( dat |> mutate(x = x + 10001) )
+
 
 set.seed(see0 <- 1 + see0)
 t1 <- system.time(
@@ -28,16 +32,16 @@ t2 <- system.time(
                    niter = 5000, niter_outer = 100 # does not seem to do anything
   ))
 
-print(rbind(r=t1, c=t2))
+print(rbind(c1=t1, c2=t2))
 
-print(rbind(OA_r=c(s$OA, Obar=s$Obar),
-            OA_c=c(s2$OA, Obar=s2$Obar)))
+print(rbind(OA_c1=c(s$OA, Obar=s$Obar),
+            OA_c2=c(s2$OA, Obar=s2$Obar)))
 
 
 
 a <- s$stratification
 b <- s2$stratification
-print(table(a,b) )
+#print(table(a,b) )
 
 # Check obar
 of <- function(s) {
@@ -48,7 +52,7 @@ print(c(of(a), of(b)))
 #
 
 par(mfrow=c(2,1))
-image(z = matrix(a, 11), asp = 1)
-image(z = matrix(b, 11), asp = 1)
+image(z = matrix(a, length(unique(dat$x))))
+image(z = matrix(b, length(unique(dat$x))))
 
 

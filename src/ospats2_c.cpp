@@ -3,7 +3,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::export]]
-List ospats_ref_c(
+List ospats2_c(
   NumericMatrix D2,
   IntegerVector strat_init,
   NumericVector OA2_init,
@@ -45,7 +45,7 @@ List ospats_ref_c(
 
     for(it_in = 0; it_in < niter_inner; it_in++) {
       transfers = 0;
-      randomShuffle(u);
+      randomShuffle(u); // randomise order of visiting units
 
       for(ii = 0; ii < n; ii++){
         i  = u[ii];
@@ -62,7 +62,7 @@ List ospats_ref_c(
           Odelta = sqrt(OA2_no_i)- sqrt(OA2[si]) + sqrt(OA2_add_i) - sqrt(OA2[si_new]);
           if(Odelta < (-Obj * 1e-10) ) Odelta = 0;
           prob = exp(-abs(Odelta)/temperature);
-          if(Rcpp::runif(1, 0, 1)[0] < prob) {
+          if(Rcpp::runif(1)[0] < prob) {
             strat[i]    = si_new;
             OA2[si]     = OA2_no_i;
             OA2[si_new] = OA2_add_i;

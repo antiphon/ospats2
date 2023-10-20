@@ -57,7 +57,8 @@ ospats2 <- function(x,
   OA2_init <- sapply(split(1:n, strat0), \(i)
             sum( D2[i,i] ))  / 2
   # run
-  res <- ospats_ref_c(D2, strat0-1, # go base 0
+  res <- ospats2_c(D2,
+                      strat0-1, # go base 0
                       OA2_init,
                       niter, niter_outer,
                       temperature, coolingrate, verbose )
