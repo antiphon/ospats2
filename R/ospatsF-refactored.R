@@ -7,7 +7,7 @@
 #' @param nstrata number of starta to consider
 #' @param niter_outer Number of independent runs of the optimisation algorithm
 #' @param niter Number of iterations per one run of the optimisation algorithm
-#' @param verbose Print runtime diagnostics?
+#' @param verbose Print runtime diagnostics? (0,1,2)
 #' @param rsquared The R^2 in the paper (default: 1)
 #' @param temperature Annealing factor, will accept slightly bad moves with prob ~exp(-abs(delta)/temperature)
 #' @param coolingrate Change temperature each interation by this factor. Should be at most 1.
@@ -28,14 +28,15 @@ ospatsF_ref <- function(x,
                         nstrata,
                         niter = 100,
                         niter_outer = 100,
-                        verbose = FALSE,
+                        verbose = 0,
                         # Some parameters for annealing
                         temperature = 1,
                         coolingrate = .95,
                         rsquared = 1,
                         Cov
 ) {
-  cat2 <- if(verbose) message else \(x) NULL
+  cat1 <- if(verbose>0) message else \(x) NULL
+  cat2 <- if(verbose>1) message else \(x) NULL
 
   n <- nrow(x)
   xy <- cbind(x[,"x", drop = TRUE], x[,"y", drop = TRUE])
@@ -116,7 +117,7 @@ ospatsF_ref <- function(x,
       strat_best <- strat
       OA2_best    <- OA2
     }
-    cat2(sprintf("Run %4i: Objective function [%7.4f]",
+    cat1(sprintf("Run %4i: Objective function [%7.4f]",
                  outer_it, Obarfinal))
   } # outer iterations
   # done

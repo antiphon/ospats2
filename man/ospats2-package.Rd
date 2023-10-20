@@ -6,7 +6,7 @@
 \alias{ospats2-package}
 \title{ospats2: Optimal Startification With Correlations}
 \description{
-Reboot of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
+Re-imagining of Ospats (2017). Compute optimal stratification of (spatial) population while accounting for unit-to-unit correlations.
 }
 \details{
 Reboot of \code{Ospats}.
