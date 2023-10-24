@@ -15,7 +15,7 @@ List ospats2_c(
 ) {
 
 
-  int i, j, ii, si, si_new;
+  int i, j, ii, jj, si, si_new;
   int it_out,it_in;
 
   int transfers;
@@ -50,18 +50,20 @@ List ospats2_c(
       for(ii = 0; ii < n; ii++){
         i  = u[ii];
         si = strat[i];
+        OA2_no_i  = OA2[si];
+        // without i
+        for(j=0; j<n; j++) if(strat[j] == si )  OA2_no_i -= D2(i,j);
+        //
         for(si_new = 0; si_new < n_strata; si_new++) {
           if(si == si_new) continue;
           // is this strata better for i?
-          OA2_no_i  = OA2[si];
+          // with i added
           OA2_add_i = OA2[si_new];
-          for(j=0; j<n; j++) {
-            if(strat[j] == si )          OA2_no_i -= D2(i,j);
-            else if(strat[j] == si_new) OA2_add_i += D2(i,j);
-          }
+          for(j=0; j<n; j++) if(strat[j] == si_new) OA2_add_i += D2(i,j);
+          // improvement
           Odelta = sqrt(OA2_no_i)- sqrt(OA2[si]) + sqrt(OA2_add_i) - sqrt(OA2[si_new]);
           if(Odelta < (-Obj * 1e-10) ) Odelta = 0;
-          prob = exp(-abs(Odelta)/temperature);
+          prob = exp(-Odelta/temperature);
           if(Rcpp::runif(1)[0] < prob) {
             strat[i]    = si_new;
             OA2[si]     = OA2_no_i;

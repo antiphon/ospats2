@@ -28,6 +28,82 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compute_Sh
+NumericVector compute_Sh(NumericMatrix Z, IntegerVector strat, int nstrata);
+RcppExport SEXP _ospats2_compute_Sh(SEXP ZSEXP, SEXP stratSEXP, SEXP nstrataSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type strat(stratSEXP);
+    Rcpp::traits::input_parameter< int >::type nstrata(nstrataSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_Sh(Z, strat, nstrata));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_Sh_h
+double compute_Sh_h(NumericMatrix Z, IntegerVector strat, int h);
+RcppExport SEXP _ospats2_compute_Sh_h(SEXP ZSEXP, SEXP stratSEXP, SEXP hSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type strat(stratSEXP);
+    Rcpp::traits::input_parameter< int >::type h(hSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_Sh_h(Z, strat, h));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_Sh_changes
+NumericVector compute_Sh_changes(NumericMatrix Z, IntegerVector strat, int h_from, int h_to);
+RcppExport SEXP _ospats2_compute_Sh_changes(SEXP ZSEXP, SEXP stratSEXP, SEXP h_fromSEXP, SEXP h_toSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type strat(stratSEXP);
+    Rcpp::traits::input_parameter< int >::type h_from(h_fromSEXP);
+    Rcpp::traits::input_parameter< int >::type h_to(h_toSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_Sh_changes(Z, strat, h_from, h_to));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ospats2_MC_c
+List ospats2_MC_c(NumericMatrix Z, IntegerVector strat_init, NumericVector Sh_init, int niter_inner, int niter_outer, double temperature, double coolingrate, int verbose);
+RcppExport SEXP _ospats2_ospats2_MC_c(SEXP ZSEXP, SEXP strat_initSEXP, SEXP Sh_initSEXP, SEXP niter_innerSEXP, SEXP niter_outerSEXP, SEXP temperatureSEXP, SEXP coolingrateSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type strat_init(strat_initSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Sh_init(Sh_initSEXP);
+    Rcpp::traits::input_parameter< int >::type niter_inner(niter_innerSEXP);
+    Rcpp::traits::input_parameter< int >::type niter_outer(niter_outerSEXP);
+    Rcpp::traits::input_parameter< double >::type temperature(temperatureSEXP);
+    Rcpp::traits::input_parameter< double >::type coolingrate(coolingrateSEXP);
+    Rcpp::traits::input_parameter< int >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(ospats2_MC_c(Z, strat_init, Sh_init, niter_inner, niter_outer, temperature, coolingrate, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ospats2_MC_v2_c
+List ospats2_MC_v2_c(NumericMatrix Z, IntegerVector strat_init, NumericVector Sh_init, int niter_inner, int niter_outer, double temperature, double coolingrate, int verbose);
+RcppExport SEXP _ospats2_ospats2_MC_v2_c(SEXP ZSEXP, SEXP strat_initSEXP, SEXP Sh_initSEXP, SEXP niter_innerSEXP, SEXP niter_outerSEXP, SEXP temperatureSEXP, SEXP coolingrateSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type Z(ZSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type strat_init(strat_initSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Sh_init(Sh_initSEXP);
+    Rcpp::traits::input_parameter< int >::type niter_inner(niter_innerSEXP);
+    Rcpp::traits::input_parameter< int >::type niter_outer(niter_outerSEXP);
+    Rcpp::traits::input_parameter< double >::type temperature(temperatureSEXP);
+    Rcpp::traits::input_parameter< double >::type coolingrate(coolingrateSEXP);
+    Rcpp::traits::input_parameter< int >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(ospats2_MC_v2_c(Z, strat_init, Sh_init, niter_inner, niter_outer, temperature, coolingrate, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
 // ospats_ref_c
 List ospats_ref_c(NumericMatrix D2, IntegerVector strat_init, NumericVector OA2_init, int niter_inner, int niter_outer, double temperature, double coolingrate, int verbose);
 RcppExport SEXP _ospats2_ospats_ref_c(SEXP D2SEXP, SEXP strat_initSEXP, SEXP OA2_initSEXP, SEXP niter_innerSEXP, SEXP niter_outerSEXP, SEXP temperatureSEXP, SEXP coolingrateSEXP, SEXP verboseSEXP) {
@@ -49,6 +125,11 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_ospats2_ospats2_c", (DL_FUNC) &_ospats2_ospats2_c, 8},
+    {"_ospats2_compute_Sh", (DL_FUNC) &_ospats2_compute_Sh, 3},
+    {"_ospats2_compute_Sh_h", (DL_FUNC) &_ospats2_compute_Sh_h, 3},
+    {"_ospats2_compute_Sh_changes", (DL_FUNC) &_ospats2_compute_Sh_changes, 4},
+    {"_ospats2_ospats2_MC_c", (DL_FUNC) &_ospats2_ospats2_MC_c, 8},
+    {"_ospats2_ospats2_MC_v2_c", (DL_FUNC) &_ospats2_ospats2_MC_v2_c, 8},
     {"_ospats2_ospats_ref_c", (DL_FUNC) &_ospats2_ospats_ref_c, 8},
     {NULL, NULL, 0}
 };

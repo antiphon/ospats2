@@ -5,6 +5,26 @@ ospats2_c <- function(D2, strat_init, OA2_init, niter_inner, niter_outer, temper
     .Call('_ospats2_ospats2_c', PACKAGE = 'ospats2', D2, strat_init, OA2_init, niter_inner, niter_outer, temperature, coolingrate, verbose)
 }
 
+compute_Sh <- function(Z, strat, nstrata) {
+    .Call('_ospats2_compute_Sh', PACKAGE = 'ospats2', Z, strat, nstrata)
+}
+
+compute_Sh_h <- function(Z, strat, h) {
+    .Call('_ospats2_compute_Sh_h', PACKAGE = 'ospats2', Z, strat, h)
+}
+
+compute_Sh_changes <- function(Z, strat, h_from, h_to) {
+    .Call('_ospats2_compute_Sh_changes', PACKAGE = 'ospats2', Z, strat, h_from, h_to)
+}
+
+ospats2_MC_c <- function(Z, strat_init, Sh_init, niter_inner, niter_outer, temperature, coolingrate, verbose) {
+    .Call('_ospats2_ospats2_MC_c', PACKAGE = 'ospats2', Z, strat_init, Sh_init, niter_inner, niter_outer, temperature, coolingrate, verbose)
+}
+
+ospats2_MC_v2_c <- function(Z, strat_init, Sh_init, niter_inner, niter_outer, temperature, coolingrate, verbose) {
+    .Call('_ospats2_ospats2_MC_v2_c', PACKAGE = 'ospats2', Z, strat_init, Sh_init, niter_inner, niter_outer, temperature, coolingrate, verbose)
+}
+
 ospats_ref_c <- function(D2, strat_init, OA2_init, niter_inner, niter_outer, temperature, coolingrate, verbose) {
     .Call('_ospats2_ospats_ref_c', PACKAGE = 'ospats2', D2, strat_init, OA2_init, niter_inner, niter_outer, temperature, coolingrate, verbose)
 }
