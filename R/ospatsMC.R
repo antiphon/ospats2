@@ -38,7 +38,7 @@ ospatsMC <- function(Z,
   # Initial penalty terms
   Sh_init <- sapply(split(1:nrow(Z),
                            strat0),
-                     \(i)  mean(apply(Z[i,], 2, sd)) * sqrt(length(i) * (length(i)-1))  )
+                     \(i)  mean(apply(Z[i,, drop=FALSE], 2, sd)) * sqrt(length(i) * (length(i)-1))  )
 
   ## The spatially correlated deviations
   # run
