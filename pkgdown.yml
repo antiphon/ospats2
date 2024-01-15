@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   legacy: legacy.html
-last_built: 2023-10-26T10:36Z
+last_built: 2024-01-15T07:17Z
 urls:
   reference: https://antiphon.github.io/ospats2/reference
   article: https://antiphon.github.io/ospats2/articles
