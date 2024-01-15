@@ -35,6 +35,7 @@ ospatsMC <- function(Z,
   z_mean     <- rowMeans(Z)
   strat0     <- cumrootf(z_mean, nstrata)
   #
+  #
   # Initial penalty terms
   Sh_init <- sapply(split(1:nrow(Z),
                            strat0),

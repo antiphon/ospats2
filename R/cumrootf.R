@@ -1,6 +1,7 @@
 #' Naive Cum-Root-F stratification
 #'
 #' @export
+
 cumrootf <- function(y, nstrata, nbins = 1000) {
   m <- min(y)
   M <- max(y)
